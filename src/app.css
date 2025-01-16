@@ -1,0 +1,108 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@keyframes rainbow {
+	0% {
+		background-position: 0% 0%;
+	}
+	50% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 200% 0%;
+	}
+}
+
+@layer base {
+	:root {
+		@apply bg-orange-100 pb-2;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	span,
+	div,
+	p {
+		color: aliceblue;
+		text-align: center;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial,
+			sans-serif;
+	}
+}
+
+@layer utilities {
+	.rainbow-anim-bg {
+		background: linear-gradient(
+			142deg,
+			#ff2400,
+			#ff7b46,
+			#fff89a,
+			#72ff8a,
+			#a8f9ff,
+			#6a6dff,
+			#f36eff,
+			#f36eff,
+			#6a6dff,
+			#a8f9ff,
+			#72ff8a,
+			#fff89a,
+			#ff7b46,
+			#ff2400
+		);
+		background-size: 1200% 100%;
+		animation: rainbow 8s linear infinite;
+
+		@apply bg-clip-text;
+	}
+
+	.bg-grid-gradient {
+		background:
+			linear-gradient(to top left, rgb(212, 255, 192), rgb(255, 255, 255, 0), rgb(255, 173, 173)),
+			linear-gradient(to top right, rgb(201, 205, 255), rgb(255, 255, 255, 0), rgb(254, 255, 173))
+				rgb(255, 255, 255, 1);
+	}
+}
+
+@layer components {
+	.pfp-btn {
+		cursor: pointer;
+		transform: scale(1);
+		box-shadow: 0 0 10px rgb(0, 0, 0, 0.6);
+	}
+
+	.pfp-btn:hover {
+		transform: scale(1.06);
+	}
+
+	.pfp-btn:active {
+		transform: scale(0.97);
+	}
+
+	.pfp-btn:active::after {
+		@apply rainbow-anim-bg absolute left-0 top-0 block h-full w-full;
+
+		content: '';
+		z-index: 80;
+		opacity: 0.7;
+		mix-blend-mode: overlay;
+		background-clip: unset;
+	}
+
+	#column {
+		width: 75%;
+		height: max(100%, 100vh);
+		padding: 32px 10px;
+		margin: auto;
+		margin-top: 83px;
+		justify-content: center;
+		box-shadow: 0px 0px 30px rgba(50, 50, 50, 0.6);
+		border-radius: 5px;
+		background-color: rgba(50, 50, 50, 0.6);
+		backdrop-filter: blur(1.5px);
+	}
+}
